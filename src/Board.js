@@ -79,12 +79,37 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      // get a hold of the row
+      var row = this.rows()[rowIndex];
+
+      var totalQueens = 0;
+      //if the row has a queen on it there is a conflict
+      for (var i = 0; i < row.length; i++) {
+        //hey current row, are you occupied?
+        if (row[i] === 1) {
+          totalQueens++;
+          if(totalQueens > 1){
+            //if you are, we have a conflict
+            return true;
+
+          }
+        }
+      }
+      return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      // check for conflicts on each row
+      var rows = this.rows();
+      for (var i = 0; i < rows.length; i++) {
+        // if there are any, let me know
+        if(this.hasRowConflictAt(i))  {
+          return true
+        }
+      }
+
+      return false;
     },
 
 
@@ -94,12 +119,31 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      var rows = this.rows();
+      //iterate through each row at colIndex and check if it
+      var totalQueens = 0;
+      for(var i=0; i<rows.length; i++ ){
+        if (rows[i][colIndex] === 1) {
+          totalQueens++;
+          if(totalQueens > 1){
+            return true;
+          }
+        }
+      }
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      // check for conflicts on each col
+      var rows = this.rows();
+      for(var i=0; i<rows.length; i++){
+        // if there is, return true;
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -109,12 +153,38 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var rows = this.rows();
+      var totalQueens = 0;
+      // loop through the board, starting at first row (0), majorIndex
+      for (var i = 0; i < rows.length; i++) {
+        // if there is a queen,
+        if (rows[i][majorDiagonalColumnIndexAtFirstRow] === 1) {
+          // if totalQueens > 1, there is a conflict
+          totalQueens++;
+          if (totalQueens > 1) {
+            return true;
+          }
+        }
+        majorDiagonalColumnIndexAtFirstRow++;
+
+
+      }
+
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var rows = this.rows();
+      for(var i=0; i<rows.length; i++){
+        console.log(rows[i]);
+        if(this.hasMajorDiagonalConflictAt(i)){
+          console.log("has conflicts");
+          return true;
+        }
+      }
+      console.log("has no conflicts")
+      return false;
     },
 
 
