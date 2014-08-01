@@ -154,6 +154,7 @@
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var rows = this.rows();
+      console.log(rows);
       var totalQueens = 0;
       // loop through the board, starting at first row (0), majorIndex
       for (var i = 0; i < rows.length; i++) {
@@ -176,14 +177,12 @@
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
       var rows = this.rows();
-      for(var i=0; i<rows.length; i++){
+      for(var i= -(rows.length-1); i<rows.length; i++){
 
         if(this.hasMajorDiagonalConflictAt(i)){
-
           return true;
         }
       }
-
       return false;
     },
 
@@ -217,7 +216,7 @@
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
       var rows = this.rows();
-      for(var i=0; i<rows.length; i++){
+      for(var i=0; i<rows.length+(rows.length-1); i++){
 
         if(this.hasMinorDiagonalConflictAt(i)){
 
